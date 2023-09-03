@@ -13,3 +13,11 @@ spring:
       enabled: true
 server:
   port: 1999
+
+resilience4j:
+  ratelimiter:
+    instances:
+      createLimit:
+        limit-for-period: 10
+        limit-refresh-period: 1m
+        timeout-duration: 10s

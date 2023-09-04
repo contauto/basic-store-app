@@ -2,25 +2,27 @@ package com.berkemaktav.basicstoreapp.service;
 
 import com.berkemaktav.basicstoreapp.model.Product;
 import com.berkemaktav.basicstoreapp.repository.ProductRepository;
-import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
-
 @Service
-@Log4j2
 public class ProductService {
     private final ProductRepository productRepository;
+    private static final Logger logger= LogManager.getLogger(ProductService.class);
 
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
-    public Long createProduct(Product product){
-        Product inDb=productRepository.findByName(product.getName());
-        if (Objects.nonNull(inDb)){
-            return inDb.getId();
+    public Long createProduct(Product product) {
+        if (product.getName().isBlank()) {
+            logger.error("Product name is blank");
+            throw new IllegalArgumentException("Field is blank");
         }
-        return productRepository.save(product).getId();
+
+        Product inDb = productRepository.findByName(product.getName());
+        return inDb != null ? inDb.getId() : productRepository.save(product).getId();
     }
+
 }

@@ -11,6 +11,8 @@ spring:
   h2:
     console:
       enabled: true
+  messages:
+    basename: messages
 server:
   port: 1999
 
@@ -21,3 +23,4 @@ resilience4j:
         limit-for-period: 10
         limit-refresh-period: 1m
         timeout-duration: 10s
+

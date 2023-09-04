@@ -4,16 +4,14 @@ import com.berkemaktav.basicstoreapp.model.Product;
 import com.berkemaktav.basicstoreapp.service.ProductService;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import jakarta.validation.Valid;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Log4j2
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/api/1.0/product")
 public class ProductController {
     private final ProductService productService;
 

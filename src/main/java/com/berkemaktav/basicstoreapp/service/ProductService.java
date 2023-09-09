@@ -1,5 +1,6 @@
 package com.berkemaktav.basicstoreapp.service;
 
+import com.berkemaktav.basicstoreapp.exception.BlankFieldException;
 import com.berkemaktav.basicstoreapp.model.Product;
 import com.berkemaktav.basicstoreapp.repository.ProductRepository;
 import org.apache.logging.log4j.LogManager;
@@ -18,7 +19,7 @@ public class ProductService {
     public Long createProduct(Product product) {
         if (product.getName().isBlank()) {
             logger.error("Product name is blank");
-            throw new IllegalArgumentException("Field is blank");
+            throw new BlankFieldException("Field is blank");
         }
 
         Product inDb = productRepository.findByName(product.getName());
